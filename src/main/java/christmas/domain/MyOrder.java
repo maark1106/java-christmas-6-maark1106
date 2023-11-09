@@ -12,11 +12,8 @@ public class MyOrder {
 
     public MyOrder(String inputOrders) {
         String[] orders = inputOrders.split(",");
-        addOrder(orders);
-    }
+        inputParseAndAddOrder(orders);
 
-    public Map<String, Integer> getMyOrders() {
-        return myOrders;
     }
 
     public boolean isValidOrderFormat(String order) {
@@ -24,7 +21,7 @@ public class MyOrder {
         return matcher.matches();
     }
 
-    private void addOrder(String[] orders) {
+    private void inputParseAndAddOrder(String[] orders) {
         for (String order : orders) {
             if (!isValidOrderFormat(order)) {
                 throw new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요.");
@@ -32,7 +29,19 @@ public class MyOrder {
             String[] orderParts = order.split("-");
             String menuName = orderParts[0].trim();
             int quantity = Integer.parseInt(orderParts[1].trim());
-            myOrders.put(menuName, quantity);
+            addOrder(menuName, quantity);
         }
+    }
+
+    private void addOrder(String menuName, int quantity) {
+        if(myOrders.containsKey(menuName)){
+            throw new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        }
+        myOrders.put(menuName, quantity);
+    }
+
+
+    public Map<String, Integer> getMyOrders() {
+        return myOrders;
     }
 }
