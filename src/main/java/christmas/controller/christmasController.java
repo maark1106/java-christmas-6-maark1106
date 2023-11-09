@@ -24,7 +24,7 @@ public class christmasController {
     }
 
     private MyOrder orderMenus() {
-        try(true){
+        while(true){
             try{
                 String orderMenus = InputView.InputOrderMenus();
                 MyOrder myOrder = new MyOrder(orderMenus);
