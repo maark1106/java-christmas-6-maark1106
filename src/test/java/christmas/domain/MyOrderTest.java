@@ -24,4 +24,12 @@ class MyOrderTest {
         assertThatThrownBy(() -> new MyOrder(menus))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("개수 1미만 입력 시 예외처리")
+    @Test
+    void OrderCountLessThanOneTest() {
+        String menus = "해산물파스타-0,해산물파스타-1,초코케이크-1";
+        assertThatThrownBy(() -> new MyOrder(menus))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
