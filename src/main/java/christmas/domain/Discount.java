@@ -38,7 +38,7 @@ public class Discount {
     }
 
     public void checkSpecialDayDiscount(Map<String, Integer> benefitStorage, Date date) {
-        if(specialDiscountDays.contains(date)){
+        if(specialDiscountDays.contains(date.getDate())){
             benefitStorage.put("특별 할인: ", 1000);
         }
     }
