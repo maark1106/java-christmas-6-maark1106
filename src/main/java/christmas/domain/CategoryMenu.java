@@ -24,7 +24,19 @@ public enum CategoryMenu {
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요."));
     }
 
+    public static int getDessertCount(Map<String, Integer> myOrders) {
+        return myOrders.entrySet().stream()
+                .filter(entry -> CategoryMenu.DESSERT.menus.contains(entry.getKey()))
+                .mapToInt(entry -> entry.getValue() * entry.getValue())
+                .sum();
+    }
 
+    public static int getMainCount(Map<String, Integer> myOrders) {
+        return myOrders.entrySet().stream()
+                .filter(entry -> CategoryMenu.MAIN.menus.contains(entry.getKey()))
+                .mapToInt(entry -> entry.getValue() * entry.getValue())
+                .sum();
+    }
 
     public List<String> getMenus() {
         return menus;

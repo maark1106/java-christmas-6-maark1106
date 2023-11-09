@@ -1,5 +1,7 @@
 package christmas.controller;
 
+import static christmas.domain.CategoryMenu.*;
+
 import christmas.domain.CategoryMenu;
 import christmas.domain.Date;
 import christmas.domain.Discount;
@@ -58,6 +60,10 @@ public class ChristmasController {
         OutputView.printPresentationMenu(presentationCheck);
 
         Map<String, Integer> benefitStorage = new HashMap<>();
-
+        if(totalPrice >= 10000) {
+            discountInformation.checkSpecialDiscountDays(benefitStorage, date);
+            discountInformation.checkWeekDayDiscount(benefitStorage, getDessertCount(myOrder.getMyOrders()), date);
+            discountInformation.checkWeekendDiscount(benefitStorage, CategoryMenu.getMainCount(myOrder.getMyOrders()), date);
+        }
     }
 }
