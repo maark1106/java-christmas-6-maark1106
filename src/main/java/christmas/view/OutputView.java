@@ -9,4 +9,8 @@ public class OutputView {
     public static void printBenefitPreviewMessage(){
         System.out.println("12월 26일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!");
     }
+
+    public static void printErrorMessage(String errorMessage) {
+        System.out.println("[ERROR] : " + errorMessage);
+    }
 }
