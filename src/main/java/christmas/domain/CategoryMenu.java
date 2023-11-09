@@ -1,5 +1,6 @@
 package christmas.domain;
 
+import java.util.Arrays;
 import java.util.List;
 
 public enum CategoryMenu {
@@ -13,6 +14,14 @@ public enum CategoryMenu {
 
     CategoryMenu(List<String> menus) {
         this.menus = menus;
+    }
+
+    public static void validateAvailableMenu(String menuName){
+        Arrays.stream(CategoryMenu.values())
+                .filter(category -> category.menus.contains(menuName))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요."));
+        }
     }
 
     public List<String> getMenus() {

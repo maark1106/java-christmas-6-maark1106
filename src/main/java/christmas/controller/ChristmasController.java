@@ -1,11 +1,15 @@
 package christmas.controller;
 
+import christmas.domain.CategoryMenu;
 import christmas.domain.Date;
 import christmas.domain.MyOrder;
+import christmas.service.ChristmasService;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
 public class ChristmasController {
+
+    private static final ChristmasService christmasService = new ChristmasService();
 
     public void run(){
         Date date = inputExpectedDate();
@@ -28,6 +32,7 @@ public class ChristmasController {
             try{
                 String orderMenus = InputView.InputOrderMenus();
                 MyOrder myOrder = new MyOrder(orderMenus);
+                christmasService.validateMyOrder(myOrder);
                 return myOrder;
             }catch (IllegalArgumentException e){
                 OutputView.printErrorMessage(e.getMessage());
