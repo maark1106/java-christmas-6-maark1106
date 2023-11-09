@@ -34,7 +34,7 @@ public class MyOrder {
     }
 
     private void addOrder(String menuName, int quantity) {
-        if (myOrders.containsKey(menuName)) {
+        if(myOrders.containsKey(menuName)){
             throw new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요.");
         }
         myOrders.put(menuName, quantity);
@@ -55,12 +55,14 @@ public class MyOrder {
     }
 
     private void totalMenuOverTwenty(Map<String, Integer> myOrders) {
-        myOrders.entrySet()
+        int total = myOrders
+                .values()
                 .stream()
-                .filter(entry -> entry.getValue() < 1)
-                .forEach(entry -> {
-                    throw new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요.");
-                });
+                .mapToInt(Integer::intValue)
+                .sum();
+        if (total > 20) {
+            throw new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        }
     }
 
     public Map<String, Integer> getMyOrders() {
