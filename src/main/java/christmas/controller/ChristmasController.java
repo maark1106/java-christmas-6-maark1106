@@ -2,6 +2,7 @@ package christmas.controller;
 
 import christmas.domain.CategoryMenu;
 import christmas.domain.Date;
+import christmas.domain.Discount;
 import christmas.domain.MyOrder;
 import christmas.service.ChristmasService;
 import christmas.view.InputView;
@@ -14,7 +15,8 @@ public class ChristmasController {
     public void run(){
         Date date = inputExpectedDate();
         MyOrder myOrder = orderMenus();
-        printOrderInformation(myOrder, date);
+        int totalPrice = getOrderInformation(myOrder);
+        getBenefitInformation(myOrder, date, totalPrice);
     }
 
     private Date inputExpectedDate() {
@@ -41,9 +43,16 @@ public class ChristmasController {
         }
     }
 
-    private void printOrderInformation(MyOrder myOrder, Date date) {
+    private int getOrderInformation(MyOrder myOrder) {
         OutputView.printOrderMenu(myOrder);
         int orderAmount = christmasService.getOrderAmount(myOrder);
         OutputView.printTotalAmountBeforeDiscount(orderAmount);
+        return orderAmount;
+    }
+
+    private void getBenefitInformation(MyOrder myOrder,Date date, int totalPrice) {
+        Discount discountInformation = new Discount();
+        boolean presentationCheck = discountInformation.checkPresentationMenu(totalPrice);
+        OutputView.printPresentationMenu(presentationCheck);
     }
 }

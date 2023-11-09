@@ -32,4 +32,13 @@ public class OutputView {
         NumberFormat numberFormat = NumberFormat.getInstance();
         System.out.println(numberFormat.format(orderAmount) + "원");
     }
+
+    public static void printPresentationMenu(boolean presentationCheck) {
+        System.out.println("<증정 메뉴>");
+        if(!presentationCheck){
+            System.out.println("없음");
+            return;
+        }
+        System.out.println("샴페인 1개");
+    }
 }
