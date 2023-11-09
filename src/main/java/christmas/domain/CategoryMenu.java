@@ -27,14 +27,14 @@ public enum CategoryMenu {
     public static int getDessertCount(Map<String, Integer> myOrders) {
         return myOrders.entrySet().stream()
                 .filter(entry -> CategoryMenu.DESSERT.menus.contains(entry.getKey()))
-                .mapToInt(entry -> entry.getValue() * entry.getValue())
+                .mapToInt(entry -> entry.getValue())
                 .sum();
     }
 
     public static int getMainCount(Map<String, Integer> myOrders) {
         return myOrders.entrySet().stream()
                 .filter(entry -> CategoryMenu.MAIN.menus.contains(entry.getKey()))
-                .mapToInt(entry -> entry.getValue() * entry.getValue())
+                .mapToInt(entry -> entry.getValue())
                 .sum();
     }
 
