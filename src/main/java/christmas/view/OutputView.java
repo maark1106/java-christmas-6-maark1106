@@ -41,4 +41,15 @@ public class OutputView {
         }
         System.out.println("샴페인 1개");
     }
+
+    public static void printBenefitDetails(Map<String, Integer> benefitStorage) {
+        System.out.println("<혜택 내역>");
+        if(benefitStorage.isEmpty()){
+            System.out.println("없음");
+            return;
+        }
+        for (String benefitName : benefitStorage.keySet()) {
+            System.out.println(benefitName + benefitStorage.get(benefitName)*-1);
+        }
+    }
 }

@@ -67,5 +67,6 @@ public class ChristmasController {
             discountInformation.checkSpecialDayDiscount(benefitStorage,date);
             discountInformation.checkPresentDiscount(benefitStorage,presentationCheck);
         }
+        OutputView.printBenefitDetails(benefitStorage);
     }
 }
