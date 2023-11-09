@@ -2,6 +2,7 @@ package christmas.domain;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public enum CategoryMenu {
 
@@ -22,6 +23,8 @@ public enum CategoryMenu {
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요."));
     }
+
+
 
     public List<String> getMenus() {
         return menus;

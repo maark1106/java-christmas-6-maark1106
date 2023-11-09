@@ -7,6 +7,8 @@ import christmas.domain.MyOrder;
 import christmas.service.ChristmasService;
 import christmas.view.InputView;
 import christmas.view.OutputView;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ChristmasController {
 
@@ -54,5 +56,8 @@ public class ChristmasController {
         Discount discountInformation = new Discount();
         boolean presentationCheck = discountInformation.checkPresentationMenu(totalPrice);
         OutputView.printPresentationMenu(presentationCheck);
+
+        Map<String, Integer> benefitStorage = new HashMap<>();
+
     }
 }
