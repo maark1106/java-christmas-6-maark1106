@@ -13,7 +13,7 @@ public class MyOrder {
     public MyOrder(String inputOrders) {
         String[] orders = inputOrders.split(",");
         inputParseAndAddOrder(orders);
-
+        validateMyOrder(myOrders);
     }
 
     public boolean isValidOrderFormat(String order) {
@@ -40,6 +40,18 @@ public class MyOrder {
         myOrders.put(menuName, quantity);
     }
 
+    private void validateMyOrder(Map<String, Integer> myOrders) {
+        OrderCountLessThanOne(myOrders);
+    }
+
+    private void OrderCountLessThanOne(Map<String, Integer> myOrders) {
+        myOrders.entrySet()
+                .stream()
+                .filter(entry -> entry.getValue() < 1)
+                .forEach(entry -> {
+                    throw new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요.");
+                });
+    }
 
     public Map<String, Integer> getMyOrders() {
         return myOrders;
