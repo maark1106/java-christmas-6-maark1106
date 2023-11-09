@@ -20,4 +20,15 @@ public class InputValidator {
             throw new IllegalArgumentException("공백일 수 없습니다");
         }
     }
+
+    public static void validateOrderMenus(String orderMenus) {
+        inputEmptyException(orderMenus);
+        inputContainEmptyException(orderMenus);
+    }
+
+    private static void inputContainEmptyException(String orderMenus) {
+        if(orderMenus.contains(" ")){
+            throw new IllegalArgumentException("입력 형식에 맞지 않습니다");
+        }
+    }
 }
