@@ -5,7 +5,7 @@ import christmas.domain.MyOrder;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
-public class christmasController {
+public class ChristmasController {
 
     public void run(){
         Date date = inputExpectedDate();
@@ -28,6 +28,7 @@ public class christmasController {
             try{
                 String orderMenus = InputView.InputOrderMenus();
                 MyOrder myOrder = new MyOrder(orderMenus);
+                return myOrder;
             }catch (IllegalArgumentException e){
                 OutputView.printErrorMessage(e.getMessage());
             }

@@ -32,4 +32,12 @@ class MyOrderTest {
         assertThatThrownBy(() -> new MyOrder(menus))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("모든 메뉴 개수 합이 20 초과시 예외 처리")
+    @Test
+    void totalMenuOverTwentyTest() {
+        String menus = "해산물파스타-10,레드와인-8,초코케이크-3";
+        assertThatThrownBy(() -> new MyOrder(menus))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }

@@ -1,7 +1,10 @@
 package christmas;
 
+import christmas.controller.ChristmasController;
+
 public class Application {
     public static void main(String[] args) {
-        System.out.println("프로그램 테스트");
+        ChristmasController christmasController = new ChristmasController();
+        christmasController.run();
     }
 }
