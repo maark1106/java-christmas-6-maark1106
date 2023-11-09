@@ -1,5 +1,7 @@
 package christmas.domain;
 
+import java.util.Arrays;
+
 public enum MenuPrice {
 
     양송이수프(6000),
@@ -19,6 +21,15 @@ public enum MenuPrice {
 
     MenuPrice(int price) {
         this.price = price;
+    }
+
+    public static int calculatePrice(String menuName, Integer count) {
+        for (MenuPrice menu : values()) {
+            if (menu.name().equalsIgnoreCase(menuName)) {
+                return menu.price * count;
+            }
+        }
+        return 0;
     }
 
     public int getPrice() {
