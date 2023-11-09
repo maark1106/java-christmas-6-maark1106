@@ -20,7 +20,8 @@ public class ChristmasController {
         Date date = inputExpectedDate();
         MyOrder myOrder = orderMenus();
         int totalPrice = getOrderInformation(myOrder);
-        getBenefitInformation(myOrder, date, totalPrice);
+        Discount benefitInformation = getBenefitInformation(myOrder, date, totalPrice);
+        getResult(benefitInformation, totalPrice);
     }
 
     private Date inputExpectedDate() {
@@ -54,7 +55,7 @@ public class ChristmasController {
         return orderAmount;
     }
 
-    private void getBenefitInformation(MyOrder myOrder,Date date, int totalPrice) {
+    private Discount getBenefitInformation(MyOrder myOrder, Date date, int totalPrice) {
         Discount discountInformation = new Discount();
         boolean presentationCheck = discountInformation.checkPresentationMenu(totalPrice);
         OutputView.printPresentationMenu(presentationCheck);
@@ -68,5 +69,11 @@ public class ChristmasController {
             discountInformation.checkPresentDiscount(benefitStorage,presentationCheck);
         }
         OutputView.printBenefitDetails(benefitStorage);
+        discountInformation.addDiscountAmount(benefitStorage);
+        return discountInformation;
+    }
+
+    private void getResult(Discount benefitInformation, int totalPrice) {
+        OutputView.printTotalBenefitAmount(benefitInformation);
     }
 }
