@@ -75,5 +75,6 @@ public class ChristmasController {
 
     private void getResult(Discount benefitInformation, int totalPrice) {
         OutputView.printTotalBenefitAmount(benefitInformation);
+        OutputView.printAmountAfterDiscount(benefitInformation,totalPrice);
     }
 }

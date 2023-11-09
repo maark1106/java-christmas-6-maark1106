@@ -28,11 +28,6 @@ public class OutputView {
         }
     }
 
-    private static String getNumberFormat(int number) {
-        NumberFormat numberFormat = NumberFormat.getInstance();
-        return numberFormat.format(number) + "원";
-    }
-
     public static void printTotalAmountBeforeDiscount(int orderAmount) {
         System.out.println("<할인 전 총주문 금액>");
         System.out.println(getNumberFormat(orderAmount));
@@ -67,5 +62,16 @@ public class OutputView {
             return;
         }
         System.out.println(getNumberFormat(discountAmount * -1));
+    }
+
+    public static void printAmountAfterDiscount(Discount benefitInformation, int totalPrice) {
+        System.out.println("<할인 후 예상 결제 금액>");
+        int amountAfterDiscount = totalPrice - benefitInformation.getDiscountAmount();
+        System.out.println(getNumberFormat(amountAfterDiscount));
+    }
+
+    private static String getNumberFormat(int number) {
+        NumberFormat numberFormat = NumberFormat.getInstance();
+        return numberFormat.format(number) + "원";
     }
 }
