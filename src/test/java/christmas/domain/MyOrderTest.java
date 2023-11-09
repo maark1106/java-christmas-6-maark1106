@@ -16,4 +16,12 @@ class MyOrderTest {
         assertThatThrownBy(() -> new MyOrder(menus))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("중복된 메뉴 입력 시 예외 처리")
+    @Test
+    void orderDuplicateTest() {
+        String menus = "해산물파스타-1,해산물파스타-1,초코케이크-1";
+        assertThatThrownBy(() -> new MyOrder(menus))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
