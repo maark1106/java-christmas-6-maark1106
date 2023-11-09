@@ -12,7 +12,7 @@ class MyOrderTest {
     @DisplayName("입력 받은 메뉴가 형식과 다르면 예외처리")
     @Test
     void validOrderFormatTest() {
-        String menus = "해산물파스타-1,레드와인-1,초코케이크-1";
+        String menus = "해산물파스타-a,레드와인-1,초코케이크-1";
         assertThatThrownBy(() -> new MyOrder(menus))
                 .isInstanceOf(IllegalArgumentException.class);
     }
