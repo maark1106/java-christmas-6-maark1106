@@ -14,6 +14,7 @@ public class ChristmasController {
     public void run(){
         Date date = inputExpectedDate();
         MyOrder myOrder = orderMenus();
+        printOrderInformation(myOrder, date);
     }
 
     private Date inputExpectedDate() {
@@ -40,4 +41,7 @@ public class ChristmasController {
         }
     }
 
+    private void printOrderInformation(MyOrder myOrder, Date date) {
+        OutputView.printOrderMenu(myOrder);
+    }
 }

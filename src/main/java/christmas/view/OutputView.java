@@ -1,5 +1,8 @@
 package christmas.view;
 
+import christmas.domain.MyOrder;
+import java.util.Map;
+
 public class OutputView {
 
     public static void printWelcomeMessage(){
@@ -12,5 +15,14 @@ public class OutputView {
 
     public static void printErrorMessage(String errorMessage) {
         System.out.println("[ERROR] : " + errorMessage);
+    }
+
+    public static void printOrderMenu(MyOrder myOrder) {
+        Map<String, Integer> myOrders = myOrder.getMyOrders();
+
+        System.out.println("<주문 메뉴>");
+        for (String menuName : myOrders.keySet()) {
+            System.out.println(menuName + " " + myOrders.get(menuName));
+        }
     }
 }
