@@ -44,5 +44,6 @@ public class ChristmasController {
     private void printOrderInformation(MyOrder myOrder, Date date) {
         OutputView.printOrderMenu(myOrder);
         int orderAmount = christmasService.getOrderAmount(myOrder);
+        OutputView.printTotalAmountBeforeDiscount(orderAmount);
     }
 }

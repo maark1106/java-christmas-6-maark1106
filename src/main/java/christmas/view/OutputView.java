@@ -1,6 +1,7 @@
 package christmas.view;
 
 import christmas.domain.MyOrder;
+import java.text.NumberFormat;
 import java.util.Map;
 
 public class OutputView {
@@ -24,5 +25,11 @@ public class OutputView {
         for (String menuName : myOrders.keySet()) {
             System.out.println(menuName + " " + myOrders.get(menuName));
         }
+    }
+
+    public static void printTotalAmountBeforeDiscount(int orderAmount) {
+        System.out.println("<할인 전 총주문 금액>");
+        NumberFormat numberFormat = NumberFormat.getInstance();
+        System.out.println(numberFormat.format(orderAmount) + "원");
     }
 }
