@@ -19,7 +19,7 @@ public class Discount {
         return false;
     }
 
-    public void checkSpecialDiscountDays(Map<String, Integer> benefitStorage, Date date) {
+    public void checkChristMasDDayDiscountDays(Map<String, Integer> benefitStorage, Date date) {
         if (specialDiscountDays.contains(date.getDate())) {
             benefitStorage.put("크리스마스 디데이 할인: ", 100 * date.getDate());
         }

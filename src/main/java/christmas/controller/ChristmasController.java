@@ -61,7 +61,7 @@ public class ChristmasController {
 
         Map<String, Integer> benefitStorage = new HashMap<>();
         if(totalPrice >= 10000) {
-            discountInformation.checkSpecialDiscountDays(benefitStorage, date);
+            discountInformation.checkChristMasDDayDiscountDays(benefitStorage, date);
             discountInformation.checkWeekDayDiscount(benefitStorage, getDessertCount(myOrder.getMyOrders()), date);
             discountInformation.checkWeekendDiscount(benefitStorage, CategoryMenu.getMainCount(myOrder.getMyOrders()), date);
         }
