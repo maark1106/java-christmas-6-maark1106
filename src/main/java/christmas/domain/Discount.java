@@ -42,4 +42,10 @@ public class Discount {
             benefitStorage.put("특별 할인: ", 1000);
         }
     }
+
+    public void checkPresentDiscount(Map<String, Integer> benefitStorage, boolean presentationCheck) {
+        if(presentationCheck){
+            benefitStorage.put("증정 이벤트: ", 25000);
+        }
+    }
 }
