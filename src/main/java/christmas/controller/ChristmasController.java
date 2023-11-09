@@ -2,6 +2,7 @@ package christmas.controller;
 
 import static christmas.domain.CategoryMenu.*;
 
+import christmas.domain.Badge;
 import christmas.domain.CategoryMenu;
 import christmas.domain.Date;
 import christmas.domain.Discount;
@@ -76,5 +77,7 @@ public class ChristmasController {
     private void getResult(Discount benefitInformation, int totalPrice) {
         OutputView.printTotalBenefitAmount(benefitInformation);
         OutputView.printAmountAfterDiscount(benefitInformation,totalPrice);
+        Badge eventBadge = Badge.getEventBadge(benefitInformation);
+        OutputView.printBadge(eventBadge);
     }
 }

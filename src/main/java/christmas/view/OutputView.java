@@ -1,5 +1,6 @@
 package christmas.view;
 
+import christmas.domain.Badge;
 import christmas.domain.Discount;
 import christmas.domain.MyOrder;
 import java.text.NumberFormat;
@@ -68,6 +69,15 @@ public class OutputView {
         System.out.println("<할인 후 예상 결제 금액>");
         int amountAfterDiscount = totalPrice - benefitInformation.getDiscountAmount();
         System.out.println(getNumberFormat(amountAfterDiscount));
+    }
+
+    public static void printBadge(Badge eventBadge) {
+        System.out.println("<12월 이벤트 배지>");
+        if(eventBadge == null){
+            System.out.println("없음");
+            return;
+        }
+        System.out.println(eventBadge);
     }
 
     private static String getNumberFormat(int number) {
