@@ -34,17 +34,27 @@ public class MyOrder {
     }
 
     private void addOrder(String menuName, int quantity) {
-        if(myOrders.containsKey(menuName)){
+        if (myOrders.containsKey(menuName)) {
             throw new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요.");
         }
         myOrders.put(menuName, quantity);
     }
 
     private void validateMyOrder(Map<String, Integer> myOrders) {
-        OrderCountLessThanOne(myOrders);
+        orderCountLessThanOne(myOrders);
+        totalMenuOverTwenty(myOrders);
     }
 
-    private void OrderCountLessThanOne(Map<String, Integer> myOrders) {
+    private void orderCountLessThanOne(Map<String, Integer> myOrders) {
+        myOrders.entrySet()
+                .stream()
+                .filter(entry -> entry.getValue() < 1)
+                .forEach(entry -> {
+                    throw new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요.");
+                });
+    }
+
+    private void totalMenuOverTwenty(Map<String, Integer> myOrders) {
         myOrders.entrySet()
                 .stream()
                 .filter(entry -> entry.getValue() < 1)
