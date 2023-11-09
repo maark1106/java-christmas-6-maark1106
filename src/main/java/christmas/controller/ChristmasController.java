@@ -64,6 +64,7 @@ public class ChristmasController {
             discountInformation.checkChristMasDDayDiscountDays(benefitStorage, date);
             discountInformation.checkWeekDayDiscount(benefitStorage, getDessertCount(myOrder.getMyOrders()), date);
             discountInformation.checkWeekendDiscount(benefitStorage, CategoryMenu.getMainCount(myOrder.getMyOrders()), date);
+            discountInformation.checkSpecialDayDiscount(benefitStorage,date);
         }
     }
 }

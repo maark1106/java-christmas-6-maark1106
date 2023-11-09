@@ -36,4 +36,10 @@ public class Discount {
             benefitStorage.put("주말 할인: ", 2023 * mainCount);
         }
     }
+
+    public void checkSpecialDayDiscount(Map<String, Integer> benefitStorage, Date date) {
+        if(specialDiscountDays.contains(date)){
+            benefitStorage.put("특별 할인: ", 1000);
+        }
+    }
 }
