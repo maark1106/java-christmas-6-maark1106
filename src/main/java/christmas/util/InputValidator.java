@@ -3,7 +3,7 @@ package christmas.util;
 public class InputValidator {
 
     public static void validateVisitDate(String visitDate){
-        inputEmptyException(visitDate);
+        visitDateEmptyException(visitDate);
         inputNotIntegerTypeException(visitDate);
     }
 
@@ -11,24 +11,30 @@ public class InputValidator {
         try {
             Integer.parseInt(visitDate);
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("입력값이 정수가 아닙니다.");
+            throw new IllegalArgumentException("유효하지 않은 날짜입니다. 다시 입력해 주세요.");
         }
     }
 
-    private static void inputEmptyException(String visitDate) {
+    private static void visitDateEmptyException(String visitDate) {
         if(visitDate.isEmpty()){
-            throw new IllegalArgumentException("공백일 수 없습니다");
+            throw new IllegalArgumentException("유효하지 않은 날짜입니다. 다시 입력해 주세요.");
         }
     }
 
     public static void validateOrderMenus(String orderMenus) {
-        inputEmptyException(orderMenus);
+        orderMenusEmptyException(orderMenus);
         inputContainEmptyException(orderMenus);
+    }
+
+    private static void orderMenusEmptyException(String orderMenus) {
+        if(orderMenus.isEmpty()){
+            throw new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        }
     }
 
     private static void inputContainEmptyException(String orderMenus) {
         if(orderMenus.contains(" ")){
-            throw new IllegalArgumentException("입력 형식에 맞지 않습니다");
+            throw new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요.");
         }
     }
 }
