@@ -17,7 +17,7 @@ public class OutputView {
     }
 
     public static void printErrorMessage(String errorMessage) {
-        System.out.println("[ERROR] : " + errorMessage);
+        System.out.println("[ERROR] " + errorMessage);
     }
 
     public static void printOrderMenu(MyOrder myOrder) {
