@@ -33,18 +33,17 @@ public enum CategoryMenu {
     }
 
     private static void validateOrderOnlyDrinks(Map<String, Integer> myOrders) {
-        int beverageCounts = getBeverageCount(myOrders);
-        if(beverageCounts != myOrders.size()){
+        int beverageCounts = getBeverageTypeCount(myOrders);
+        if(beverageCounts == myOrders.size()){
             throw new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요.");
         }
     }
 
-    private static int getBeverageCount(Map<String, Integer> myOrders) {
-        return myOrders.entrySet()
+    private static int getBeverageTypeCount(Map<String, Integer> myOrders) {
+        return (int)myOrders.entrySet()
                 .stream()
                 .filter(entry -> CategoryMenu.BEVERAGE.menus.contains(entry.getKey()))
-                .mapToInt(entry -> entry.getValue())
-                .sum();
+                .count();
     }
 
     public static int getDessertCount(Map<String, Integer> myOrders) {
