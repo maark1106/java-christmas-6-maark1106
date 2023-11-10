@@ -17,6 +17,14 @@ public enum CategoryMenu {
         this.menus = menus;
     }
 
+    public static void validateMyOrder(MyOrder myOrder) {
+        Map<String, Integer> myOrders = myOrder.getMyOrders();
+        for (String menuName : myOrders.keySet()) {
+            validateAvailableMenu(menuName);
+        }
+        validateOrderOnlyDrinks(myOrders);
+    }
+
     public static void validateAvailableMenu(String menuName){
         Arrays.stream(CategoryMenu.values())
                 .filter(category -> category.menus.contains(menuName))
@@ -24,15 +32,32 @@ public enum CategoryMenu {
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요."));
     }
 
+    private static void validateOrderOnlyDrinks(Map<String, Integer> myOrders) {
+        int beverageCounts = getBeverageCount(myOrders);
+        if(beverageCounts != myOrders.size()){
+            throw new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        }
+    }
+
+    private static int getBeverageCount(Map<String, Integer> myOrders) {
+        return myOrders.entrySet()
+                .stream()
+                .filter(entry -> CategoryMenu.BEVERAGE.menus.contains(entry.getKey()))
+                .mapToInt(entry -> entry.getValue())
+                .sum();
+    }
+
     public static int getDessertCount(Map<String, Integer> myOrders) {
-        return myOrders.entrySet().stream()
+        return myOrders.entrySet()
+                .stream()
                 .filter(entry -> CategoryMenu.DESSERT.menus.contains(entry.getKey()))
                 .mapToInt(entry -> entry.getValue())
                 .sum();
     }
 
     public static int getMainCount(Map<String, Integer> myOrders) {
-        return myOrders.entrySet().stream()
+        return myOrders.entrySet()
+                .stream()
                 .filter(entry -> CategoryMenu.MAIN.menus.contains(entry.getKey()))
                 .mapToInt(entry -> entry.getValue())
                 .sum();

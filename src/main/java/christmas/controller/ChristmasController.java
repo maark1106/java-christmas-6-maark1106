@@ -41,7 +41,7 @@ public class ChristmasController {
             try{
                 String orderMenus = InputView.InputOrderMenus();
                 MyOrder myOrder = new MyOrder(orderMenus);
-                christmasService.validateMyOrder(myOrder);
+                CategoryMenu.validateMyOrder(myOrder);
                 return myOrder;
             }catch (IllegalArgumentException e){
                 OutputView.printErrorMessage(e.getMessage());
