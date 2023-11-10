@@ -68,6 +68,9 @@ public class OutputView {
     public static void printAmountAfterDiscount(Discount benefitInformation, int totalPrice) {
         System.out.println("<할인 후 예상 결제 금액>");
         int amountAfterDiscount = totalPrice - benefitInformation.getDiscountAmount();
+        if(benefitInformation.hasGift()){
+            amountAfterDiscount += 25000;
+        }
         System.out.println(getNumberFormat(amountAfterDiscount));
     }
 

@@ -6,6 +6,7 @@ import java.util.Map;
 public class Discount {
 
     private int discountAmount;
+    private boolean gift;
     private static final List<Integer> specialDiscountDays = List.of(3, 10, 17, 24, 25, 31);
 
     public Discount() {
@@ -14,8 +15,10 @@ public class Discount {
 
     public boolean checkPresentationMenu(int totalPrice) {
         if (totalPrice >= 120000) {
+            this.gift = true;
             return true;
         }
+        this.gift = false;
         return false;
     }
 
@@ -57,5 +60,9 @@ public class Discount {
 
     public int getDiscountAmount() {
         return discountAmount;
+    }
+
+    public boolean hasGift() {
+        return gift;
     }
 }
