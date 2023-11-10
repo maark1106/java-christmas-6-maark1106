@@ -25,4 +25,14 @@ class CategoryMenuTest {
         assertThatCode(() -> CategoryMenu.validateAvailableMenu(menuName))
                 .doesNotThrowAnyException();
     }
+
+    @DisplayName("음료만 주문한 경우 예외 처리")
+    @ParameterizedTest
+    @ValueSource(strings = {"제로콜라-3,레드와인-6", "제로콜라-1,레드와인-3,샴페인-6"})
+    void validateOrderOnlyDrinksTest(String orderMenus) {
+        assertThatThrownBy(()->
+                CategoryMenu.validateMyOrder(new MyOrder(orderMenus)))
+                .isInstanceOf(IllegalArgumentException.class);
+
+    }
 }
