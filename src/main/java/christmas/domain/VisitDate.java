@@ -2,13 +2,13 @@ package christmas.domain;
 
 import java.util.List;
 
-public class Date {
+public class VisitDate {
 
     private static final List<Integer> weekends = List.of(1,2,8,9,15,16,22,23,29,30);
     private final int date;
     private final boolean weekend;
 
-    public Date(int date) {
+    public VisitDate(int date) {
         validateDate(date);
         this.date = date;
         this.weekend = isWeekend(date);

@@ -1,38 +1,36 @@
 package christmas.controller;
 
-import static christmas.domain.CategoryMenu.*;
+import static christmas.domain.Badge.getEventBadge;
+import static christmas.domain.CategoryMenu.validateMyOrder;
 
 import christmas.domain.Badge;
-import christmas.domain.CategoryMenu;
-import christmas.domain.Date;
+import christmas.domain.VisitDate;
 import christmas.domain.Discount;
 import christmas.domain.MenuPrice;
 import christmas.domain.MyOrder;
 import christmas.view.InputView;
 import christmas.view.OutputView;
-import java.util.HashMap;
 import java.util.Map;
 
 public class ChristmasController {
 
+    private VisitDate visitDate;
+    private MyOrder myOrder;
+
     public void run(){
-        Date visitDate = startReservation();
-        MyOrder myOrder = orderMenus();
+        visitDate = startReservation();
+        myOrder = orderMenus();
         int totalPrice = getOrderInformation(myOrder);
-        Discount benefitInformation = getBenefitInformation(myOrder, visitDate, totalPrice);
-        getResult(benefitInformation, totalPrice);
+        Discount discountInformation = checkBenefits(totalPrice);
+        getResult(discountInformation);
     }
 
-    private Date startReservation() {
+    private VisitDate startReservation() {
         OutputView.printWelcomeMessage();
-        return inputExpectedDate();
-    }
-
-    private Date inputExpectedDate() {
         while(true) {
             try {
-                int expectedDate = InputView.InputVisitDate();
-                return new Date(expectedDate);
+                int expectedDate = InputView.inputVisitDate();
+                return new VisitDate(expectedDate);
             } catch (IllegalArgumentException e) {
                 OutputView.printErrorMessage(e.getMessage());
             }
@@ -42,9 +40,9 @@ public class ChristmasController {
     private MyOrder orderMenus() {
         while(true){
             try{
-                String orderMenus = InputView.InputOrderMenus();
+                String orderMenus = InputView.inputOrderMenus();
                 MyOrder myOrder = new MyOrder(orderMenus);
-                CategoryMenu.validateMyOrder(myOrder);
+                validateMyOrder(myOrder);
                 return myOrder;
             }catch (IllegalArgumentException e){
                 OutputView.printErrorMessage(e.getMessage());
@@ -60,28 +58,19 @@ public class ChristmasController {
         return orderAmount;
     }
 
-    private Discount getBenefitInformation(MyOrder myOrder, Date visitDate, int totalPrice) {
-        Discount discountInformation = new Discount();
-        boolean presentationCheck = discountInformation.checkPresentationMenu(totalPrice);
-        OutputView.printPresentationMenu(presentationCheck);
+    private Discount checkBenefits(int totalPrice) {
+        Discount discountInformation = new Discount(totalPrice);
+        OutputView.printPresentationMenu(discountInformation);
 
-        Map<String, Integer> benefitStorage = new HashMap<>();
-        if(totalPrice >= 10000) {
-            discountInformation.checkChristmasDDayDiscountDays(benefitStorage, visitDate);
-            discountInformation.checkWeekDayDiscount(benefitStorage, getDessertCount(myOrder.getMyOrders()), visitDate);
-            discountInformation.checkWeekendDiscount(benefitStorage, CategoryMenu.getMainCount(myOrder.getMyOrders()), visitDate);
-            discountInformation.checkSpecialDayDiscount(benefitStorage,visitDate);
-            discountInformation.checkPresentDiscount(benefitStorage,presentationCheck);
-        }
+        Map<String, Integer> benefitStorage = discountInformation.storeBenefits(myOrder, visitDate, discountInformation);
         OutputView.printBenefitDetails(benefitStorage);
         discountInformation.addDiscountAmount(benefitStorage);
         return discountInformation;
     }
 
-    private void getResult(Discount benefitInformation, int totalPrice) {
-        OutputView.printTotalBenefitAmount(benefitInformation.getDiscountAmount());
-        OutputView.printAmountAfterDiscount(benefitInformation,totalPrice);
-        Badge eventBadge = Badge.getEventBadge(benefitInformation);
-        OutputView.printBadge(eventBadge);
+    private void getResult(Discount discountInformation) {
+        OutputView.printTotalBenefitAmount(discountInformation.getDiscountAmount());
+        OutputView.printAmountAfterDiscount(discountInformation.getAmountAfterDiscount());
+        OutputView.printBadge(getEventBadge(discountInformation));
     }
 }

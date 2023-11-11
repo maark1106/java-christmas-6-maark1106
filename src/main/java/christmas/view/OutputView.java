@@ -31,9 +31,9 @@ public class OutputView {
         System.out.println(getNumberFormat(orderAmount));
     }
 
-    public static void printPresentationMenu(boolean presentationCheck) {
+    public static void printPresentationMenu(Discount discountInformation) {
         System.out.println("<증정 메뉴>");
-        if (!presentationCheck) {
+        if (!discountInformation.hasGift()) {
             System.out.println("없음");
             return;
         }
@@ -65,12 +65,8 @@ public class OutputView {
         System.out.println(getNumberFormat(discountAmount * -1));
     }
 
-    public static void printAmountAfterDiscount(Discount benefitInformation, int totalPrice) {
+    public static void printAmountAfterDiscount(int amountAfterDiscount) {
         System.out.println("<할인 후 예상 결제 금액>");
-        int amountAfterDiscount = totalPrice - benefitInformation.getDiscountAmount();
-        if(benefitInformation.hasGift()){
-            amountAfterDiscount += 25000;
-        }
         System.out.println(getNumberFormat(amountAfterDiscount));
     }
 
