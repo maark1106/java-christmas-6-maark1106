@@ -51,7 +51,7 @@ public class OutputView {
         }
         for (String benefitName : benefitStorage.keySet()) {
             String numberFormat = getNumberFormat(benefitStorage.get(benefitName) * -1);
-            System.out.println(benefitName + numberFormat);
+            System.out.println(benefitName + ": " + numberFormat);
         }
     }
 

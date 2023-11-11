@@ -9,12 +9,6 @@ import java.util.Map;
 
 public class ChristmasService {
 
-    public int getOrderAmount(MyOrder myOrder) {
-        Map<String, Integer> myOrders = myOrder.getMyOrders();
-        return myOrders.entrySet()
-                .stream()
-                .mapToInt(entry -> MenuPrice.calculatePrice(entry.getKey(), entry.getValue()))
-                .sum();
-    }
+
 
 }

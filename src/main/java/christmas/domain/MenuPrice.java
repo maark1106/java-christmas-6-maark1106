@@ -1,6 +1,7 @@
 package christmas.domain;
 
 import java.util.Arrays;
+import java.util.Map;
 
 public enum MenuPrice {
 
@@ -30,6 +31,14 @@ public enum MenuPrice {
             }
         }
         return 0;
+    }
+
+    public static int getOrderAmount(MyOrder myOrder) {
+        Map<String, Integer> myOrders = myOrder.getMyOrders();
+        return myOrders.entrySet()
+                .stream()
+                .mapToInt(entry -> MenuPrice.calculatePrice(entry.getKey(), entry.getValue()))
+                .sum();
     }
 
     public int getPrice() {

@@ -6,6 +6,7 @@ import christmas.domain.Badge;
 import christmas.domain.CategoryMenu;
 import christmas.domain.Date;
 import christmas.domain.Discount;
+import christmas.domain.MenuPrice;
 import christmas.domain.MyOrder;
 import christmas.service.ChristmasService;
 import christmas.view.InputView;
@@ -51,7 +52,7 @@ public class ChristmasController {
 
     private int getOrderInformation(MyOrder myOrder) {
         OutputView.printOrderMenu(myOrder);
-        int orderAmount = christmasService.getOrderAmount(myOrder);
+        int orderAmount = MenuPrice.getOrderAmount(myOrder);
         OutputView.printTotalAmountBeforeDiscount(orderAmount);
         return orderAmount;
     }

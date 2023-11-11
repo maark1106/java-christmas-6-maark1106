@@ -1,5 +1,6 @@
 package christmas.domain;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -11,26 +12,32 @@ public class MyOrder {
     private final Map<String, Integer> myOrders = new HashMap<>();
 
     public MyOrder(String inputOrders) {
-        String[] orders = inputOrders.split(",");
-        inputParseAndAddOrder(orders);
+        parseOrdersByFormat(inputOrders);
         validateMyOrder(myOrders);
     }
 
-    public boolean isValidOrderFormat(String order) {
-        Matcher matcher = ORDER_PATTERN.matcher(order);
-        return matcher.matches();
+    private void parseOrdersByFormat(String inputOrders) {
+        String[] orders = inputOrders.split(",");
+        for (String order : orders) {
+            validOrderFormat(order);
+            addAfterParse(order);
+        }
     }
 
-    private void inputParseAndAddOrder(String[] orders) {
-        for (String order : orders) {
-            if (!isValidOrderFormat(order)) {
-                throw new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요.");
-            }
-            String[] orderParts = order.split("-");
-            String menuName = orderParts[0].trim();
-            int quantity = Integer.parseInt(orderParts[1].trim());
-            addOrder(menuName, quantity);
+    public void validOrderFormat(String order) {
+        Matcher matcher = ORDER_PATTERN.matcher(order);
+        if(!matcher.matches()) {
+            throw new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요.");
         }
+    }
+
+    private void addAfterParse(String order) {
+        String[] orderParts =
+                Arrays.stream(order.split("-"))
+                .map(String::trim)
+                .toArray(String[]::new);
+
+        addOrder(orderParts[0], Integer.parseInt(orderParts[1]));
     }
 
     private void addOrder(String menuName, int quantity) {
@@ -42,7 +49,7 @@ public class MyOrder {
 
     private void validateMyOrder(Map<String, Integer> myOrders) {
         orderCountLessThanOne(myOrders);
-        totalMenuOverTwenty(myOrders);
+        exceedTotalMenuTwenty(myOrders);
     }
 
     private void orderCountLessThanOne(Map<String, Integer> myOrders) {
@@ -54,18 +61,20 @@ public class MyOrder {
                 });
     }
 
-    private void totalMenuOverTwenty(Map<String, Integer> myOrders) {
-        int total = myOrders
-                .values()
-                .stream()
-                .mapToInt(Integer::intValue)
-                .sum();
-        if (total > 20) {
+    private void exceedTotalMenuTwenty(Map<String, Integer> myOrders) {
+        if (getTotalOrderCount(myOrders) > 20) {
             throw new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요.");
         }
     }
 
-    public Map<String, Integer> getMyOrders() {
+    private int getTotalOrderCount(Map<String, Integer> myOrders) {
+        return myOrders.values()
+                .stream()
+                .mapToInt(Integer::intValue)
+                .sum();
+    }
+
+    public Map<String, Integer> getMyOrders()  {
         return myOrders;
     }
 }

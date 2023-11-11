@@ -24,31 +24,31 @@ public class Discount {
 
     public void checkChristMasDDayDiscountDays(Map<String, Integer> benefitStorage, Date date) {
         if (date.getDate() <= 25) {
-            benefitStorage.put("크리스마스 디데이 할인: ", 1000 + 100 * (date.getDate() - 1));
+            benefitStorage.put("크리스마스 디데이 할인", 1000 + 100 * (date.getDate() - 1));
         }
     }
 
     public void checkWeekDayDiscount(Map<String, Integer> benefitStorage, int dessertCount, Date date) {
         if (!date.isWeekend()) {
-            benefitStorage.put("평일 할인: ", 2023 * dessertCount);
+            benefitStorage.put("평일 할인", 2023 * dessertCount);
         }
     }
 
     public void checkWeekendDiscount(Map<String, Integer> benefitStorage, int mainCount, Date date) {
         if (date.isWeekend()) {
-            benefitStorage.put("주말 할인: ", 2023 * mainCount);
+            benefitStorage.put("주말 할인", 2023 * mainCount);
         }
     }
 
     public void checkSpecialDayDiscount(Map<String, Integer> benefitStorage, Date date) {
         if(specialDiscountDays.contains(date.getDate())){
-            benefitStorage.put("특별 할인: ", 1000);
+            benefitStorage.put("특별 할인", 1000);
         }
     }
 
     public void checkPresentDiscount(Map<String, Integer> benefitStorage, boolean presentationCheck) {
         if(presentationCheck){
-            benefitStorage.put("증정 이벤트: ", 25000);
+            benefitStorage.put("증정 이벤트", 25000);
         }
     }
 
