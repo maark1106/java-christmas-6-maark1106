@@ -16,12 +16,16 @@ import java.util.Map;
 public class ChristmasController {
 
     public void run(){
-        OutputView.printWelcomeMessage();
-        Date date = inputExpectedDate();
+        Date visitDate = startReservation();
         MyOrder myOrder = orderMenus();
         int totalPrice = getOrderInformation(myOrder);
-        Discount benefitInformation = getBenefitInformation(myOrder, date, totalPrice);
+        Discount benefitInformation = getBenefitInformation(myOrder, visitDate, totalPrice);
         getResult(benefitInformation, totalPrice);
+    }
+
+    private Date startReservation() {
+        OutputView.printWelcomeMessage();
+        return inputExpectedDate();
     }
 
     private Date inputExpectedDate() {
@@ -56,17 +60,17 @@ public class ChristmasController {
         return orderAmount;
     }
 
-    private Discount getBenefitInformation(MyOrder myOrder, Date date, int totalPrice) {
+    private Discount getBenefitInformation(MyOrder myOrder, Date visitDate, int totalPrice) {
         Discount discountInformation = new Discount();
         boolean presentationCheck = discountInformation.checkPresentationMenu(totalPrice);
         OutputView.printPresentationMenu(presentationCheck);
 
         Map<String, Integer> benefitStorage = new HashMap<>();
         if(totalPrice >= 10000) {
-            discountInformation.checkChristmasDDayDiscountDays(benefitStorage, date);
-            discountInformation.checkWeekDayDiscount(benefitStorage, getDessertCount(myOrder.getMyOrders()), date);
-            discountInformation.checkWeekendDiscount(benefitStorage, CategoryMenu.getMainCount(myOrder.getMyOrders()), date);
-            discountInformation.checkSpecialDayDiscount(benefitStorage,date);
+            discountInformation.checkChristmasDDayDiscountDays(benefitStorage, visitDate);
+            discountInformation.checkWeekDayDiscount(benefitStorage, getDessertCount(myOrder.getMyOrders()), visitDate);
+            discountInformation.checkWeekendDiscount(benefitStorage, CategoryMenu.getMainCount(myOrder.getMyOrders()), visitDate);
+            discountInformation.checkSpecialDayDiscount(benefitStorage,visitDate);
             discountInformation.checkPresentDiscount(benefitStorage,presentationCheck);
         }
         OutputView.printBenefitDetails(benefitStorage);
