@@ -25,12 +25,11 @@ public enum MenuPrice {
     }
 
     public static int calculatePrice(String menuName, Integer count) {
-        for (MenuPrice menu : values()) {
-            if (menu.name().equalsIgnoreCase(menuName)) {
-                return menu.price * count;
-            }
-        }
-        return 0;
+        return Arrays.stream(values())
+                .filter(menu -> menu.name().equalsIgnoreCase(menuName))
+                .findFirst()
+                .map(menu -> menu.price * count)
+                .orElse(0);
     }
 
     public static int getOrderAmount(MyOrder myOrder) {
@@ -39,9 +38,5 @@ public enum MenuPrice {
                 .stream()
                 .mapToInt(entry -> MenuPrice.calculatePrice(entry.getKey(), entry.getValue()))
                 .sum();
-    }
-
-    public int getPrice() {
-        return price;
     }
 }

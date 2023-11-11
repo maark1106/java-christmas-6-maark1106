@@ -7,16 +7,16 @@ public class InputValidator {
         inputNotIntegerTypeException(visitDate);
     }
 
-    private static void inputNotIntegerTypeException(String visitDate) {
-        try {
-            Integer.parseInt(visitDate);
-        } catch (IllegalArgumentException e) {
+    private static void visitDateEmptyException(String visitDate) {
+        if(visitDate.isEmpty()){
             throw new IllegalArgumentException("유효하지 않은 날짜입니다. 다시 입력해 주세요.");
         }
     }
 
-    private static void visitDateEmptyException(String visitDate) {
-        if(visitDate.isEmpty()){
+    private static void inputNotIntegerTypeException(String visitDate) {
+        try {
+            Integer.parseInt(visitDate);
+        } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("유효하지 않은 날짜입니다. 다시 입력해 주세요.");
         }
     }

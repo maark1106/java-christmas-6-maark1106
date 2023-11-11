@@ -5,9 +5,9 @@ import java.util.Map;
 
 public class Discount {
 
+    private static final List<Integer> specialDiscountDays = List.of(3, 10, 17, 24, 25, 31);
     private int discountAmount;
     private boolean gift;
-    private static final List<Integer> specialDiscountDays = List.of(3, 10, 17, 24, 25, 31);
 
     public Discount() {
         this.discountAmount = 0;
@@ -22,7 +22,7 @@ public class Discount {
         return false;
     }
 
-    public void checkChristMasDDayDiscountDays(Map<String, Integer> benefitStorage, Date date) {
+    public void checkChristmasDDayDiscountDays(Map<String, Integer> benefitStorage, Date date) {
         if (date.getDate() <= 25) {
             benefitStorage.put("크리스마스 디데이 할인", 1000 + 100 * (date.getDate() - 1));
         }

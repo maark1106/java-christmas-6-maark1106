@@ -8,7 +8,6 @@ import christmas.domain.Date;
 import christmas.domain.Discount;
 import christmas.domain.MenuPrice;
 import christmas.domain.MyOrder;
-import christmas.service.ChristmasService;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 import java.util.HashMap;
@@ -16,9 +15,8 @@ import java.util.Map;
 
 public class ChristmasController {
 
-    private static final ChristmasService christmasService = new ChristmasService();
-
     public void run(){
+        OutputView.printWelcomeMessage();
         Date date = inputExpectedDate();
         MyOrder myOrder = orderMenus();
         int totalPrice = getOrderInformation(myOrder);
@@ -51,7 +49,8 @@ public class ChristmasController {
     }
 
     private int getOrderInformation(MyOrder myOrder) {
-        OutputView.printOrderMenu(myOrder);
+        OutputView.printBenefitPreviewMessage();
+        OutputView.printOrderMenu(myOrder.getMyOrders());
         int orderAmount = MenuPrice.getOrderAmount(myOrder);
         OutputView.printTotalAmountBeforeDiscount(orderAmount);
         return orderAmount;
@@ -64,7 +63,7 @@ public class ChristmasController {
 
         Map<String, Integer> benefitStorage = new HashMap<>();
         if(totalPrice >= 10000) {
-            discountInformation.checkChristMasDDayDiscountDays(benefitStorage, date);
+            discountInformation.checkChristmasDDayDiscountDays(benefitStorage, date);
             discountInformation.checkWeekDayDiscount(benefitStorage, getDessertCount(myOrder.getMyOrders()), date);
             discountInformation.checkWeekendDiscount(benefitStorage, CategoryMenu.getMainCount(myOrder.getMyOrders()), date);
             discountInformation.checkSpecialDayDiscount(benefitStorage,date);
@@ -76,7 +75,7 @@ public class ChristmasController {
     }
 
     private void getResult(Discount benefitInformation, int totalPrice) {
-        OutputView.printTotalBenefitAmount(benefitInformation);
+        OutputView.printTotalBenefitAmount(benefitInformation.getDiscountAmount());
         OutputView.printAmountAfterDiscount(benefitInformation,totalPrice);
         Badge eventBadge = Badge.getEventBadge(benefitInformation);
         OutputView.printBadge(eventBadge);

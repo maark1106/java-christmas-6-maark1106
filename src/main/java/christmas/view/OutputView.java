@@ -2,7 +2,6 @@ package christmas.view;
 
 import christmas.domain.Badge;
 import christmas.domain.Discount;
-import christmas.domain.MyOrder;
 import java.text.NumberFormat;
 import java.util.Map;
 
@@ -20,9 +19,7 @@ public class OutputView {
         System.out.println("[ERROR] " + errorMessage);
     }
 
-    public static void printOrderMenu(MyOrder myOrder) {
-        Map<String, Integer> myOrders = myOrder.getMyOrders();
-
+    public static void printOrderMenu(Map<String, Integer> myOrders) {
         System.out.println("<주문 메뉴>");
         for (String menuName : myOrders.keySet()) {
             System.out.println(menuName + " " + myOrders.get(menuName));
@@ -49,15 +46,18 @@ public class OutputView {
             System.out.println("없음");
             return;
         }
+        printEachBenefit(benefitStorage);
+    }
+
+    private static void printEachBenefit(Map<String, Integer> benefitStorage) {
         for (String benefitName : benefitStorage.keySet()) {
             String numberFormat = getNumberFormat(benefitStorage.get(benefitName) * -1);
             System.out.println(benefitName + ": " + numberFormat);
         }
     }
 
-    public static void printTotalBenefitAmount(Discount benefitInformation) {
+    public static void printTotalBenefitAmount(int discountAmount) {
         System.out.println("<총혜택 금액>");
-        int discountAmount = benefitInformation.getDiscountAmount();
         if (discountAmount == 0) {
             System.out.println("없음");
             return;

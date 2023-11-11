@@ -33,8 +33,7 @@ public enum CategoryMenu {
     }
 
     private static void validateOrderOnlyDrinks(Map<String, Integer> myOrders) {
-        int beverageCounts = getBeverageTypeCount(myOrders);
-        if(beverageCounts == myOrders.size()){
+        if(getBeverageTypeCount(myOrders) == myOrders.size()){
             throw new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요.");
         }
     }
@@ -60,9 +59,5 @@ public enum CategoryMenu {
                 .filter(entry -> CategoryMenu.MAIN.menus.contains(entry.getKey()))
                 .mapToInt(entry -> entry.getValue())
                 .sum();
-    }
-
-    public List<String> getMenus() {
-        return menus;
     }
 }

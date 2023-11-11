@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 public class MyOrder {
 
     private static final Pattern ORDER_PATTERN = Pattern.compile("^(.+)-(\\d+)$");
-    private final Map<String, Integer> myOrders = new HashMap<>();
+    private Map<String, Integer> myOrders = new HashMap<>();
 
     public MyOrder(String inputOrders) {
         parseOrdersByFormat(inputOrders);
@@ -17,8 +17,7 @@ public class MyOrder {
     }
 
     private void parseOrdersByFormat(String inputOrders) {
-        String[] orders = inputOrders.split(",");
-        for (String order : orders) {
+        for (String order : inputOrders.split(",")) {
             validOrderFormat(order);
             addAfterParse(order);
         }
@@ -48,11 +47,11 @@ public class MyOrder {
     }
 
     private void validateMyOrder(Map<String, Integer> myOrders) {
-        orderCountLessThanOne(myOrders);
-        exceedTotalMenuTwenty(myOrders);
+        validateOrderCountLessThanOne(myOrders);
+        validateExceedTotalMenuTwenty(myOrders);
     }
 
-    private void orderCountLessThanOne(Map<String, Integer> myOrders) {
+    private void validateOrderCountLessThanOne(Map<String, Integer> myOrders) {
         myOrders.entrySet()
                 .stream()
                 .filter(entry -> entry.getValue() < 1)
@@ -61,7 +60,7 @@ public class MyOrder {
                 });
     }
 
-    private void exceedTotalMenuTwenty(Map<String, Integer> myOrders) {
+    private void validateExceedTotalMenuTwenty(Map<String, Integer> myOrders) {
         if (getTotalOrderCount(myOrders) > 20) {
             throw new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요.");
         }

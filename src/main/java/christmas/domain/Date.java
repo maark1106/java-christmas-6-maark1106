@@ -32,7 +32,7 @@ public class Date {
     }
 
     public boolean isWeekend() {
-        if(weekend == true){
+        if(weekend){
             return true;
         }
         return false;
