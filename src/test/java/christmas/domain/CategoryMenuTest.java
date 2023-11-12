@@ -3,8 +3,10 @@ package christmas.domain;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.HashMap;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -33,6 +35,27 @@ class CategoryMenuTest {
         assertThatThrownBy(()->
                 CategoryMenu.validateMyOrder(new MyOrder(orderMenus)))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
 
+    @DisplayName("디저트 주문 개수가 몇 개인지 테스트")
+    @Test
+    void getDessertCountTest(){
+        HashMap<String, Integer> myOrders = new HashMap<>();
+        myOrders.put("초코케이크", 3);
+        myOrders.put("아이스크림", 2);
+        myOrders.put("바비큐립", 2);
+        assertThat(CategoryMenu.getDessertCount(myOrders))
+                .isEqualTo(5);
+    }
+
+    @DisplayName("메인 주문 개수가 몇 개인지 테스트")
+    @Test
+    void getMainCountTest(){
+        HashMap<String, Integer> myOrders = new HashMap<>();
+        myOrders.put("티본스테이크", 10);
+        myOrders.put("아이스크림", 2);
+        myOrders.put("바비큐립", 2);
+        assertThat(CategoryMenu.getMainCount(myOrders))
+                .isEqualTo(12);
     }
 }
