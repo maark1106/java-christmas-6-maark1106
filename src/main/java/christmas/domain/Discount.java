@@ -42,13 +42,13 @@ public class Discount {
     }
 
     private void checkWeekDayDiscount(Map<Event, Integer> benefitStorage, int dessertCount, VisitDate visitDate) {
-        if (!visitDate.isWeekend()) {
+        if (!visitDate.isWeekend() && dessertCount > 0) {
             benefitStorage.put(WEEKDAY, 2023 * dessertCount);
         }
     }
 
     private void checkWeekendDiscount(Map<Event, Integer> benefitStorage, int mainCount, VisitDate visitDate) {
-        if (visitDate.isWeekend()) {
+        if (visitDate.isWeekend() && mainCount > 0) {
             benefitStorage.put(WEEKEND, 2023 * mainCount);
         }
     }
