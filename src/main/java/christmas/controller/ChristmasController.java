@@ -4,6 +4,7 @@ import static christmas.domain.Badge.getEventBadge;
 import static christmas.domain.CategoryMenu.validateMyOrder;
 
 import christmas.domain.Badge;
+import christmas.domain.Event;
 import christmas.domain.VisitDate;
 import christmas.domain.Discount;
 import christmas.domain.MenuPrice;
@@ -62,7 +63,7 @@ public class ChristmasController {
         Discount discountInformation = new Discount(totalPrice);
         OutputView.printPresentationMenu(discountInformation);
 
-        Map<String, Integer> benefitStorage = discountInformation.storeBenefits(myOrder, visitDate, discountInformation);
+        Map<Event, Integer> benefitStorage = discountInformation.storeBenefits(myOrder, visitDate, discountInformation);
         OutputView.printBenefitDetails(benefitStorage);
         discountInformation.addDiscountAmount(benefitStorage);
         return discountInformation;

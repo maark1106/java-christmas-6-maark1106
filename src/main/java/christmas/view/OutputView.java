@@ -2,6 +2,7 @@ package christmas.view;
 
 import christmas.domain.Badge;
 import christmas.domain.Discount;
+import christmas.domain.Event;
 import java.text.NumberFormat;
 import java.util.Map;
 
@@ -40,7 +41,7 @@ public class OutputView {
         System.out.println("샴페인 1개");
     }
 
-    public static void printBenefitDetails(Map<String, Integer> benefitStorage) {
+    public static void printBenefitDetails(Map<Event, Integer> benefitStorage) {
         System.out.println("<혜택 내역>");
         if (benefitStorage.isEmpty()) {
             System.out.println("없음");
@@ -49,10 +50,10 @@ public class OutputView {
         printEachBenefit(benefitStorage);
     }
 
-    private static void printEachBenefit(Map<String, Integer> benefitStorage) {
-        for (String benefitName : benefitStorage.keySet()) {
-            String numberFormat = getNumberFormat(benefitStorage.get(benefitName) * -1);
-            System.out.println(benefitName + ": " + numberFormat);
+    private static void printEachBenefit(Map<Event, Integer> benefitStorage) {
+        for (Event event : benefitStorage.keySet()) {
+            String numberFormat = getNumberFormat(benefitStorage.get(event) * -1);
+            System.out.println(event.getEventName() + ": " + numberFormat);
         }
     }
 

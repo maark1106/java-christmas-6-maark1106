@@ -2,6 +2,11 @@ package christmas.domain;
 
 import static christmas.domain.CategoryMenu.getDessertCount;
 import static christmas.domain.CategoryMenu.getMainCount;
+import static christmas.domain.Event.CHRISTMAS_DAY;
+import static christmas.domain.Event.GIFT;
+import static christmas.domain.Event.SPECIAL_DAY;
+import static christmas.domain.Event.WEEKDAY;
+import static christmas.domain.Event.WEEKEND;
 
 import java.util.HashMap;
 import java.util.List;
@@ -18,8 +23,8 @@ public class Discount {
         this.totalPrice = totalPrice;
     }
 
-    public Map<String, Integer> storeBenefits(MyOrder myOrder, VisitDate visitDate, Discount discountInformation) {
-        Map<String, Integer> benefitStorage = new HashMap<>();
+    public Map<Event, Integer> storeBenefits(MyOrder myOrder, VisitDate visitDate, Discount discountInformation) {
+        Map<Event, Integer> benefitStorage = new HashMap<>();
         if(totalPrice >= 10000) {
             discountInformation.checkChristmasDDayDiscount(benefitStorage, visitDate);
             discountInformation.checkWeekDayDiscount(benefitStorage, getDessertCount(myOrder.getMyOrders()), visitDate);
@@ -30,37 +35,37 @@ public class Discount {
         return benefitStorage;
     }
 
-    private void checkChristmasDDayDiscount(Map<String, Integer> benefitStorage, VisitDate visitDate) {
+    private void checkChristmasDDayDiscount(Map<Event, Integer> benefitStorage, VisitDate visitDate) {
         if (visitDate.getDate() <= 25) {
-            benefitStorage.put("크리스마스 디데이 할인", 1000 + 100 * (visitDate.getDate() - 1));
+            benefitStorage.put(CHRISTMAS_DAY, 1000 + 100 * (visitDate.getDate() - 1));
         }
     }
 
-    private void checkWeekDayDiscount(Map<String, Integer> benefitStorage, int dessertCount, VisitDate visitDate) {
+    private void checkWeekDayDiscount(Map<Event, Integer> benefitStorage, int dessertCount, VisitDate visitDate) {
         if (!visitDate.isWeekend()) {
-            benefitStorage.put("평일 할인", 2023 * dessertCount);
+            benefitStorage.put(WEEKDAY, 2023 * dessertCount);
         }
     }
 
-    private void checkWeekendDiscount(Map<String, Integer> benefitStorage, int mainCount, VisitDate visitDate) {
+    private void checkWeekendDiscount(Map<Event, Integer> benefitStorage, int mainCount, VisitDate visitDate) {
         if (visitDate.isWeekend()) {
-            benefitStorage.put("주말 할인", 2023 * mainCount);
+            benefitStorage.put(WEEKEND, 2023 * mainCount);
         }
     }
 
-    private void checkSpecialDayDiscount(Map<String, Integer> benefitStorage, VisitDate visitDate) {
+    private void checkSpecialDayDiscount(Map<Event, Integer> benefitStorage, VisitDate visitDate) {
         if(specialDiscountDays.contains(visitDate.getDate())){
-            benefitStorage.put("특별 할인", 1000);
+            benefitStorage.put(SPECIAL_DAY, 1000);
         }
     }
 
-    private void checkPresentDiscount(Map<String, Integer> benefitStorage, Discount discountInformation) {
+    private void checkPresentDiscount(Map<Event, Integer> benefitStorage, Discount discountInformation) {
         if(discountInformation.hasGift()){
-            benefitStorage.put("증정 이벤트", 25000);
+            benefitStorage.put(GIFT, 25000);
         }
     }
 
-    public void addDiscountAmount(Map<String, Integer> benefitStorage) {
+    public void addDiscountAmount(Map<Event, Integer> benefitStorage) {
         for (int discountPrice : benefitStorage.values()) {
             discountAmount += discountPrice;
         }
