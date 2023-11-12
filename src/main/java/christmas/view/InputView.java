@@ -1,10 +1,9 @@
 package christmas.view;
 
-import static christmas.util.InputValidator.*;
+import static christmas.util.InputValidator.validateOrderMenus;
 import static christmas.util.InputValidator.validateVisitDate;
 
 import camp.nextstep.edu.missionutils.Console;
-import christmas.util.InputValidator;
 
 public class InputView {
 
