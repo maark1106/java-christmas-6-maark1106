@@ -78,6 +78,14 @@ class DiscountTest {
         testDiscount(myOrderNotContainAnyDiscount, 26, 0);
     }
 
+    @DisplayName("할인 전 금액이 120000원 이상일 경우 이벤트 증정")
+    @Test
+    void giveGiftTest(){
+        Discount discountInformation = new Discount(130000);
+        assertThat(discountInformation.hasGift())
+                .isEqualTo(true);
+    }
+
     private void testDiscount(MyOrder myOrder, int visitDate, int expectedAmount) {
         Discount discountInformation = new Discount(MenuPrice.getOrderAmount(myOrder));
         Map<Event, Integer> eventStorage = discountInformation.storeBenefits(myOrder,
