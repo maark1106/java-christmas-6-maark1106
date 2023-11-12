@@ -24,13 +24,6 @@ public class VisitDate {
         }
     }
 
-    private boolean isWeekend(int date) {
-        if(weekends.contains(date)){
-            return true;
-        }
-        return false;
-    }
-
     public boolean isWeekend() {
         if(weekend){
             return true;
