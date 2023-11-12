@@ -11,7 +11,7 @@ public class VisitDate {
     public VisitDate(int date) {
         validateDate(date);
         this.date = date;
-        this.weekend = isWeekend(date);
+        this.weekend = weekends.contains(date);
     }
 
     private void validateDate(int date) {
