@@ -24,6 +24,15 @@ public class InputValidator {
     public static void validateOrderMenus(String orderMenus) {
         orderMenusEmptyException(orderMenus);
         inputContainEmptyException(orderMenus);
+        orderMenusUnpairedException(orderMenus);
+    }
+
+    private static void orderMenusUnpairedException(String orderMenus) {
+        int dashCount = (int) orderMenus.chars().filter(c -> c == '-').count();
+        int commaCount = (int) orderMenus.chars().filter(c -> c == ',').count();
+        if(dashCount -1 != commaCount){
+            throw new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        }
     }
 
     private static void orderMenusEmptyException(String orderMenus) {

@@ -25,7 +25,7 @@ public class MyOrder {
 
     public void validOrderFormat(String order) {
         Matcher matcher = ORDER_PATTERN.matcher(order);
-        if(!matcher.matches()) {
+        if(!matcher.matches() ){
             throw new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요.");
         }
     }
