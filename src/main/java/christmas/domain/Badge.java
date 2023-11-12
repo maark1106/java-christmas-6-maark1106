@@ -14,8 +14,7 @@ public enum Badge {
         this.price = price;
     }
 
-    public static Badge getEventBadge(Discount benefitInformation) {
-        int discountAmount = benefitInformation.getDiscountAmount();
+    public static Badge getEventBadge(int discountAmount) {
         return Arrays.stream(values())
                 .filter(badge -> discountAmount >= badge.price)
                 .findFirst()

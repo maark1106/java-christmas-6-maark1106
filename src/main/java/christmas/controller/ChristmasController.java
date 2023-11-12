@@ -72,6 +72,6 @@ public class ChristmasController {
     private void getResult(Discount discountInformation) {
         OutputView.printTotalBenefitAmount(discountInformation.getDiscountAmount());
         OutputView.printAmountAfterDiscount(discountInformation.getAmountAfterDiscount());
-        OutputView.printBadge(getEventBadge(discountInformation));
+        OutputView.printBadge(getEventBadge(discountInformation.getDiscountAmount()));
     }
 }
