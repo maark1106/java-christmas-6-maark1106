@@ -17,4 +17,12 @@ class MenuPriceTest {
         assertThat(MenuPrice.calculatePrice(menuName,count))
                 .isEqualTo(18000);
     }
+
+    @DisplayName("할인 전 총 주문 금액 계산하는 기능")
+    @Test
+    void getOrderAmountTest() {
+        MyOrder myOrder = new MyOrder("티본스테이크-2,초코케이크-2,제로콜라-1");
+        assertThat(MenuPrice.getOrderAmount(myOrder))
+                .isEqualTo(143000);
+    }
 }
