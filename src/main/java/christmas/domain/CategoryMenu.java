@@ -6,11 +6,13 @@ import java.util.Map;
 
 public enum CategoryMenu {
 
+
     APPETIZER(List.of("양송이수프", "타파스", "시저샐러드")),
     MAIN(List.of("티본스테이크", "바비큐립", "해산물파스타", "크리스마스파스타")),
     DESSERT(List.of("초코케이크", "아이스크림")),
     BEVERAGE(List.of("제로콜라", "레드와인", "샴페인"));
 
+    private static final String INVALID_ORDER_EXCEPTION_MESSAGE = "유효하지 않은 주문입니다. 다시 입력해 주세요.";
     private final List<String> menus;
 
     CategoryMenu(List<String> menus) {
@@ -29,12 +31,12 @@ public enum CategoryMenu {
         Arrays.stream(CategoryMenu.values())
                 .filter(category -> category.menus.contains(menuName))
                 .findAny()
-                .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요."));
+                .orElseThrow(() -> new IllegalArgumentException(INVALID_ORDER_EXCEPTION_MESSAGE));
     }
 
     private static void validateOrderOnlyDrinks(Map<String, Integer> myOrders) {
         if(getBeverageTypeCount(myOrders) == myOrders.size()){
-            throw new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(INVALID_ORDER_EXCEPTION_MESSAGE);
         }
     }
 

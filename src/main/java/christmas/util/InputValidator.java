@@ -2,6 +2,10 @@ package christmas.util;
 
 public class InputValidator {
 
+    private static final String INVALID_DATE_EXCEPTION_MESSAGE = "유효하지 않은 날짜입니다. 다시 입력해 주세요.";
+    private static final String INVALID_ORDER_EXCEPTION_MESSAGE = "유효하지 않은 주문입니다. 다시 입력해 주세요.";
+    private static final String EMPTY_VALUE = " ";
+
     public static void validateVisitDate(String visitDate){
         visitDateEmptyException(visitDate);
         inputNotIntegerTypeException(visitDate);
@@ -9,7 +13,7 @@ public class InputValidator {
 
     private static void visitDateEmptyException(String visitDate) {
         if(visitDate.isEmpty()){
-            throw new IllegalArgumentException("유효하지 않은 날짜입니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(INVALID_DATE_EXCEPTION_MESSAGE);
         }
     }
 
@@ -17,7 +21,7 @@ public class InputValidator {
         try {
             Integer.parseInt(visitDate);
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("유효하지 않은 날짜입니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(INVALID_DATE_EXCEPTION_MESSAGE);
         }
     }
 
@@ -28,22 +32,32 @@ public class InputValidator {
     }
 
     private static void orderMenusUnpairedException(String orderMenus) {
-        int dashCount = (int) orderMenus.chars().filter(c -> c == '-').count();
-        int commaCount = (int) orderMenus.chars().filter(c -> c == ',').count();
-        if(dashCount -1 != commaCount){
-            throw new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        if(countDash(orderMenus) -1 != countComma(orderMenus)){
+            throw new IllegalArgumentException(INVALID_ORDER_EXCEPTION_MESSAGE);
         }
+    }
+
+    private static int countDash(String orderMenus) {
+        return (int) orderMenus.chars()
+                .filter(c -> c == '-')
+                .count();
+    }
+
+    private static int countComma(String orderMenus) {
+        return (int) orderMenus.chars()
+                .filter(c -> c == ',')
+                .count();
     }
 
     private static void orderMenusEmptyException(String orderMenus) {
         if(orderMenus.isEmpty()){
-            throw new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(INVALID_ORDER_EXCEPTION_MESSAGE);
         }
     }
 
     private static void inputContainEmptyException(String orderMenus) {
-        if(orderMenus.contains(" ")){
-            throw new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        if(orderMenus.contains(EMPTY_VALUE)){
+            throw new IllegalArgumentException(INVALID_ORDER_EXCEPTION_MESSAGE);
         }
     }
 }
