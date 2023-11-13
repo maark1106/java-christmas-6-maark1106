@@ -45,7 +45,7 @@ class MyOrderTest {
     @DisplayName("주문 메뉴 입력 예외 테스트")
     @ParameterizedTest
     @ValueSource(strings = {"양송이수프2", "양송이수프*3,초코케이크-2",
-            "양송이수프","양송이수프3-"})
+            "양송이수프", "양송이수프3-"})
     void validOrderFormatTest(String orderMenus) {
         assertThatThrownBy(() -> new MyOrder(orderMenus))
                 .isInstanceOf(IllegalArgumentException.class)

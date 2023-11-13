@@ -27,7 +27,7 @@ public enum CategoryMenu {
         validateOrderOnlyDrinks(myOrders);
     }
 
-    public static void validateAvailableMenu(String menuName){
+    public static void validateAvailableMenu(String menuName) {
         Arrays.stream(CategoryMenu.values())
                 .filter(category -> category.menus.contains(menuName))
                 .findAny()
@@ -35,13 +35,13 @@ public enum CategoryMenu {
     }
 
     private static void validateOrderOnlyDrinks(Map<String, Integer> myOrders) {
-        if(getBeverageTypeCount(myOrders) == myOrders.size()){
+        if (getBeverageTypeCount(myOrders) == myOrders.size()) {
             throw new IllegalArgumentException(INVALID_ORDER_EXCEPTION_MESSAGE);
         }
     }
 
     private static int getBeverageTypeCount(Map<String, Integer> myOrders) {
-        return (int)myOrders.entrySet()
+        return (int) myOrders.entrySet()
                 .stream()
                 .filter(entry -> CategoryMenu.BEVERAGE.menus.contains(entry.getKey()))
                 .count();

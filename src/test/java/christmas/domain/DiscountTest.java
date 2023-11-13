@@ -13,7 +13,7 @@ class DiscountTest {
     private MyOrder myOrderNotContainGift;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         myOrderContainGift = new MyOrder("양송이수프-2,티본스테이크-2,초코케이크-2,제로콜라-2");
         myOrderNotContainGift = new MyOrder("양송이수프-1,티본스테이크-1,초코케이크-1,제로콜라-1");
     }
@@ -32,51 +32,51 @@ class DiscountTest {
 
     @DisplayName("크리스마스디데이-O,평일-O,주말-X,스페셜-X,증정이벤트-O")
     @Test
-    void discountTest_3(){
+    void discountTest_3() {
         testDiscount(myOrderContainGift, 18, 31746);
     }
 
     @DisplayName("크리스마스디데이-O,평일-O,주말-X,스페셜-O,증정이벤트-X")
     @Test
-    void discountTest_4(){
+    void discountTest_4() {
         testDiscount(myOrderNotContainGift, 25, 6423);
     }
 
     @DisplayName("크리스마스디데이-O,평일-O,주말-X,스페셜-X,증정이벤트-X")
     @Test
-    void discountTest_5(){
+    void discountTest_5() {
         testDiscount(myOrderNotContainGift, 18, 4723);
     }
 
     @DisplayName("크리스마스디데이-O,평일-O,주말-X,스페셜-X,증정이벤트-X")
     @Test
-    void discountTest_6(){
+    void discountTest_6() {
         MyOrder myOrderContainOnlyChristmasDDayDiscount = new MyOrder("양송이수프-2");
         testDiscount(myOrderContainOnlyChristmasDDayDiscount, 11, 2000);
     }
 
     @DisplayName("크리스마스디데이-X,평일-X,주말-O,스페셜-O,증정이벤트-O")
     @Test
-    void discountTest_7(){
+    void discountTest_7() {
         testDiscount(myOrderContainGift, 31, 30046);
     }
 
     @DisplayName("크리스마스디데이-X,평일-O,주말-X,스페셜-X,증정이벤트-O")
     @Test
-    void discountTest_8(){
+    void discountTest_8() {
         testDiscount(myOrderContainGift, 26, 29046);
     }
 
     @DisplayName("크리스마스디데이-X,평일-X,주말-X,스페셜-X,증정이벤트-X")
     @Test
-    void discountTest_9(){
+    void discountTest_9() {
         MyOrder myOrderNotContainAnyDiscount = new MyOrder("양송이수프-1");
         testDiscount(myOrderNotContainAnyDiscount, 26, 0);
     }
 
     @DisplayName("할인 전 금액이 120000원 이상일 경우 이벤트 증정")
     @Test
-    void giveGiftTest(){
+    void giveGiftTest() {
         Discount discountInformation = new Discount(130000);
         assertThat(discountInformation.hasGift())
                 .isEqualTo(true);

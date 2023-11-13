@@ -87,7 +87,7 @@ public class OutputView {
 
     public static void printBadge(Badge eventBadge) {
         System.out.println(BADGE_PREFIX_MESSAGE);
-        if(eventBadge == null){
+        if (eventBadge == null) {
             System.out.println(NOTHING_MESSAGE);
             return;
         }

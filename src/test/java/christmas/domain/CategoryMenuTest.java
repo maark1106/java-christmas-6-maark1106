@@ -22,7 +22,7 @@ class CategoryMenuTest {
 
     @DisplayName("있는 메뉴 입력 테스트")
     @ParameterizedTest
-    @ValueSource(strings = {"티본스테이크", "타파스", "초코케이크","제로콜라"})
+    @ValueSource(strings = {"티본스테이크", "타파스", "초코케이크", "제로콜라"})
     void validateValidMenuTest(String menuName) {
         assertThatCode(() -> CategoryMenu.validateAvailableMenu(menuName))
                 .doesNotThrowAnyException();
@@ -32,14 +32,14 @@ class CategoryMenuTest {
     @ParameterizedTest
     @ValueSource(strings = {"제로콜라-3,레드와인-6", "제로콜라-1,레드와인-3,샴페인-6"})
     void validateOrderOnlyDrinksTest(String orderMenus) {
-        assertThatThrownBy(()->
+        assertThatThrownBy(() ->
                 CategoryMenu.validateMyOrder(new MyOrder(orderMenus)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("디저트 주문 개수가 몇 개인지 테스트")
     @Test
-    void getDessertCountTest(){
+    void getDessertCountTest() {
         HashMap<String, Integer> myOrders = new HashMap<>();
         myOrders.put("초코케이크", 3);
         myOrders.put("아이스크림", 2);
@@ -50,7 +50,7 @@ class CategoryMenuTest {
 
     @DisplayName("메인 주문 개수가 몇 개인지 테스트")
     @Test
-    void getMainCountTest(){
+    void getMainCountTest() {
         HashMap<String, Integer> myOrders = new HashMap<>();
         myOrders.put("티본스테이크", 10);
         myOrders.put("아이스크림", 2);

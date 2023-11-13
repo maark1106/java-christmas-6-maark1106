@@ -32,7 +32,7 @@ public class MyOrder {
     public void validOrderFormat(String order) {
         Pattern pattern = Pattern.compile(ORDER_PATTERN);
         Matcher matcher = pattern.matcher(order);
-        if(!matcher.matches() ){
+        if (!matcher.matches()) {
             throw new IllegalArgumentException(INVALID_ORDER_EXCEPTION_MESSAGE);
         }
     }
@@ -40,14 +40,14 @@ public class MyOrder {
     private void addAfterParse(String order) {
         String[] orderParts =
                 Arrays.stream(order.split(SEPARATE_ORDER_TO_MENU_AND_COUNT_REGEX))
-                .map(String::trim)
-                .toArray(String[]::new);
+                        .map(String::trim)
+                        .toArray(String[]::new);
 
         addOrder(orderParts[0], Integer.parseInt(orderParts[1]));
     }
 
     private void addOrder(String menuName, int quantity) {
-        if(myOrders.containsKey(menuName)){
+        if (myOrders.containsKey(menuName)) {
             throw new IllegalArgumentException(INVALID_ORDER_EXCEPTION_MESSAGE);
         }
         myOrders.put(menuName, quantity);
@@ -80,7 +80,7 @@ public class MyOrder {
                 .sum();
     }
 
-    public Map<String, Integer> getMyOrders()  {
+    public Map<String, Integer> getMyOrders() {
         return myOrders;
     }
 }

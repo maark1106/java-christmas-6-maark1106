@@ -20,7 +20,7 @@ class InputValidatorTest {
     @DisplayName("주문 메뉴 입력 형식이 맞지 않으면 예외 테스트")
     @ParameterizedTest
     @ValueSource(strings = {"", " ", "양송이수프 -1", "양송이수프- 2", "양송이수프-2 ",
-            "양송이수프 - 2", "양송이수프-1, 티본스테이크-3", "양송이수프-3, ","양송이수프-2,",
+            "양송이수프 - 2", "양송이수프-1, 티본스테이크-3", "양송이수프-3, ", "양송이수프-2,",
             "양송이수프--2"})
     void validateOrderMenusTest(String orderMenus) {
         assertThatThrownBy(() -> InputValidator.validateOrderMenus(orderMenus))

@@ -36,7 +36,7 @@ public class Discount {
 
     public Map<Event, Integer> storeBenefits(MyOrder myOrder, VisitDate visitDate, Discount discountInformation) {
         Map<Event, Integer> benefitStorage = new HashMap<>();
-        if(totalPrice >= MINIMUM_DISCOUNT_AMOUNT_VALUE) {
+        if (totalPrice >= MINIMUM_DISCOUNT_AMOUNT_VALUE) {
             discountInformation.checkChristmasDDayDiscount(benefitStorage, visitDate);
             discountInformation.checkWeekDayDiscount(benefitStorage, getDessertCount(myOrder.getMyOrders()), visitDate);
             discountInformation.checkWeekendDiscount(benefitStorage, getMainCount(myOrder.getMyOrders()), visitDate);
@@ -48,7 +48,9 @@ public class Discount {
 
     private void checkChristmasDDayDiscount(Map<Event, Integer> benefitStorage, VisitDate visitDate) {
         if (visitDate.getDate() <= LAST_DAY_OF_CHRISTMAS_D_DAY_DISCOUNT) {
-            benefitStorage.put(CHRISTMAS_DAY, CHRISTMAS_D_DAY_BASIC_DISCOUNT_VALUE + CHRISTMAS_D_DAY_DISCOUNT_PER_DAY_VALUE * (visitDate.getDate() - 1));
+            benefitStorage.put(CHRISTMAS_DAY,
+                    CHRISTMAS_D_DAY_BASIC_DISCOUNT_VALUE + CHRISTMAS_D_DAY_DISCOUNT_PER_DAY_VALUE * (visitDate.getDate()
+                            - 1));
         }
     }
 
@@ -65,13 +67,13 @@ public class Discount {
     }
 
     private void checkSpecialDayDiscount(Map<Event, Integer> benefitStorage, VisitDate visitDate) {
-        if(specialDiscountDays.contains(visitDate.getDate())){
+        if (specialDiscountDays.contains(visitDate.getDate())) {
             benefitStorage.put(SPECIAL_DAY, SPECIAL_DAY_DISCOUNT_VALUE);
         }
     }
 
     private void checkPresentDiscount(Map<Event, Integer> benefitStorage, Discount discountInformation) {
-        if(discountInformation.hasGift()){
+        if (discountInformation.hasGift()) {
             benefitStorage.put(GIFT, GIFT_DISCOUNT_VALUE);
         }
     }
@@ -84,14 +86,14 @@ public class Discount {
 
     public int getAmountAfterDiscount() {
         int amountAfterDiscount = totalPrice - discountAmount;
-        if(hasGift()){
+        if (hasGift()) {
             amountAfterDiscount += GIFT_DISCOUNT_VALUE;
         }
         return amountAfterDiscount;
     }
 
     public boolean hasGift() {
-        if(totalPrice >= MINIMUM_GIFT_DISCOUNT_VALUE){
+        if (totalPrice >= MINIMUM_GIFT_DISCOUNT_VALUE) {
             return true;
         }
         return false;

@@ -17,7 +17,7 @@ public class ChristmasController {
     private VisitDate visitDate;
     private MyOrder myOrder;
 
-    public void run(){
+    public void run() {
         visitDate = startReservation();
         myOrder = orderMenus();
         int totalPrice = getOrderInformation(myOrder);
@@ -27,7 +27,7 @@ public class ChristmasController {
 
     private VisitDate startReservation() {
         OutputView.printWelcomeMessage();
-        while(true) {
+        while (true) {
             try {
                 int expectedDate = InputView.inputVisitDate();
                 return new VisitDate(expectedDate);
@@ -38,13 +38,13 @@ public class ChristmasController {
     }
 
     private MyOrder orderMenus() {
-        while(true){
-            try{
+        while (true) {
+            try {
                 String orderMenus = InputView.inputOrderMenus();
                 MyOrder myOrder = new MyOrder(orderMenus);
                 validateMyOrder(myOrder);
                 return myOrder;
-            }catch (IllegalArgumentException e){
+            } catch (IllegalArgumentException e) {
                 OutputView.printErrorMessage(e.getMessage());
             }
         }

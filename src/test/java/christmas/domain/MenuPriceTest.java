@@ -12,7 +12,7 @@ class MenuPriceTest {
     void calculatePriceTest() {
         String menuName = "양송이수프";
         int count = 3;
-        assertThat(MenuPrice.calculatePrice(menuName,count))
+        assertThat(MenuPrice.calculatePrice(menuName, count))
                 .isEqualTo(18000);
     }
 

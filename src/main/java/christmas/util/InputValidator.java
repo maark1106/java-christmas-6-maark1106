@@ -6,13 +6,13 @@ public class InputValidator {
     private static final String INVALID_ORDER_EXCEPTION_MESSAGE = "유효하지 않은 주문입니다. 다시 입력해 주세요.";
     private static final String EMPTY_VALUE = " ";
 
-    public static void validateVisitDate(String visitDate){
+    public static void validateVisitDate(String visitDate) {
         visitDateEmptyException(visitDate);
         inputNotIntegerTypeException(visitDate);
     }
 
     private static void visitDateEmptyException(String visitDate) {
-        if(visitDate.isEmpty()){
+        if (visitDate.isEmpty()) {
             throw new IllegalArgumentException(INVALID_DATE_EXCEPTION_MESSAGE);
         }
     }
@@ -32,7 +32,7 @@ public class InputValidator {
     }
 
     private static void orderMenusUnpairedException(String orderMenus) {
-        if(countDash(orderMenus) -1 != countComma(orderMenus)){
+        if (countDash(orderMenus) - 1 != countComma(orderMenus)) {
             throw new IllegalArgumentException(INVALID_ORDER_EXCEPTION_MESSAGE);
         }
     }
@@ -50,13 +50,13 @@ public class InputValidator {
     }
 
     private static void orderMenusEmptyException(String orderMenus) {
-        if(orderMenus.isEmpty()){
+        if (orderMenus.isEmpty()) {
             throw new IllegalArgumentException(INVALID_ORDER_EXCEPTION_MESSAGE);
         }
     }
 
     private static void inputContainEmptyException(String orderMenus) {
-        if(orderMenus.contains(EMPTY_VALUE)){
+        if (orderMenus.contains(EMPTY_VALUE)) {
             throw new IllegalArgumentException(INVALID_ORDER_EXCEPTION_MESSAGE);
         }
     }

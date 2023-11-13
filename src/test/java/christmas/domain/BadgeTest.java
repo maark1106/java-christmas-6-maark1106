@@ -10,7 +10,7 @@ class BadgeTest {
 
     @DisplayName("할인 금액이 5000원 미만이면 배지 x")
     @ParameterizedTest
-    @ValueSource(ints = {0,1300,4900})
+    @ValueSource(ints = {0, 1300, 4900})
     void getNotEventBadge(int discountAmount) {
         assertThat(Badge.getEventBadge(discountAmount))
                 .isEqualTo(null);
@@ -18,7 +18,7 @@ class BadgeTest {
 
     @DisplayName("할인 금액이 5000원 이상, 10000원 미만이면 별 뱃지")
     @ParameterizedTest
-    @ValueSource(ints = {5000, 7500,9900})
+    @ValueSource(ints = {5000, 7500, 9900})
     void getStarEventBadge(int discountAmount) {
         assertThat(Badge.getEventBadge(discountAmount))
                 .isEqualTo(Badge.별);
