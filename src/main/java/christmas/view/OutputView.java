@@ -3,14 +3,16 @@ package christmas.view;
 import christmas.domain.Badge;
 import christmas.domain.Discount;
 import christmas.domain.Event;
+import christmas.domain.VisitDate;
 import java.text.NumberFormat;
 import java.util.Map;
 
 public class OutputView {
 
     private static final String ERROR_PREFIX = "[ERROR] ";
+    private static final String MONTH_INFORMATION = "12월 ";
     private static final String WELCOME_MESSAGE = "안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.";
-    private static final String BENEFIT_PREVIEW_MESSAGE = "12월 26일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!";
+    private static final String BENEFIT_PREVIEW_MESSAGE = "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!";
     private static final String ORDER_MENU_PREFIX_MESSAGE = "<주문 메뉴>";
     private static final String TOTAL_AMOUNT_BEFORE_DISCOUNT_PREFIX_MESSAGE = "<할인 전 총주문 금액>";
     private static final String PRESENTATION_MENU_PREFIX_MESSAGE = "<증정 메뉴>";
@@ -26,8 +28,8 @@ public class OutputView {
         System.out.println(WELCOME_MESSAGE);
     }
 
-    public static void printBenefitPreviewMessage() {
-        System.out.println(BENEFIT_PREVIEW_MESSAGE);
+    public static void printBenefitPreviewMessage(VisitDate visitDate) {
+        System.out.println(MONTH_INFORMATION + visitDate.getDate() + BENEFIT_PREVIEW_MESSAGE);
     }
 
     public static void printErrorMessage(String errorMessage) {

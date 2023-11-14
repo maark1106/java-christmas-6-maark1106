@@ -20,7 +20,7 @@ public class ChristmasController {
     public void run() {
         visitDate = startReservation();
         myOrder = orderMenus();
-        int totalPrice = getOrderInformation(myOrder);
+        int totalPrice = getOrderInformation(myOrder, visitDate);
         Discount discountInformation = checkBenefits(totalPrice);
         getResult(discountInformation);
     }
@@ -50,8 +50,8 @@ public class ChristmasController {
         }
     }
 
-    private int getOrderInformation(MyOrder myOrder) {
-        OutputView.printBenefitPreviewMessage();
+    private int getOrderInformation(MyOrder myOrder, VisitDate visitDate) {
+        OutputView.printBenefitPreviewMessage(visitDate);
         OutputView.printOrderMenu(myOrder.getMyOrders());
         int orderAmount = MenuPrice.getOrderAmount(myOrder);
         OutputView.printTotalAmountBeforeDiscount(orderAmount);
